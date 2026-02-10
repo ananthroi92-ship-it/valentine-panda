@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Be My Valentine 💖</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(135deg,#ff9a9e,#fad0c4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Arial', sans-serif;
+  overflow: hidden;
+}
+
+.card {
+  background: white;
+  padding: 30px 25px 35px;
+  border-radius: 25px;
+  text-align: center;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+  max-width: 340px;
+  width: 90%;
+  position: relative;
+  z-index: 2;
+}
+
+.emoji {
+  font-size: 90px;
+  margin-bottom: 10px;
+}
+
+h1 {
+  color: #e6005c;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+button {
+  padding: 12px 28px;
+  font-size: 18px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  margin: 8px;
+}
+
+#yes {
+  background: #ff4d6d;
+  color: white;
+}
+
+#no {
+  background: #555;
+  color: white;
+  position: absolute;
+  z-index: 3;
+}
+
+#musicBtn {
+  background: #ff85a2;
+  color: white;
+  font-size: 14px;
+  margin-top: 15px;
+}
+
+.petals {
+  position: fixed;
+  top: -50px;
+  font-size: 22px;
+  animation: fall linear infinite;
+  z-index: 1;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(360deg);
+  }
+}
+
+#couple {
+  display: none;
+  margin-top: 15px;
+  font-size: 60px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card" id="card">
+  <div class="emoji">🐼🌹</div>
+  <h1>Will you be my Valentine, Baby? 💖</h1>
+  <button id="yes">Yes</button>
+  <button id="musicBtn">🎵 Tap to play our song</button>
+</div>
+
+<button id="no">No</button>
+
+<div id="couple">💑🌹</div>
+
+<audio id="music" loop>
+  <!-- Download a romantic track from Pixabay Music and rename it to music.mp3 -->
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+/* Initial falling hearts */
+for (let i = 0; i < 25; i++) {
+  let p = document.createElement("div");
+  p.innerHTML = "💖";
+  p.className = "petals";
+  p.style.left = Math.random() * 100 + "vw";
+  p.style.animationDuration = (Math.random() * 4 + 3) + "s";
+  document.body.appendChild(p);
+}
+
+/* No button runaway */
+const noBtn = document.getElementById("no");
+noBtn.style.top = "75%";
+noBtn.style.left = "55%";
+
+noBtn.onmouseover = () => {
+  noBtn.style.top = Math.random() * 80 + "%";
+  noBtn.style.left = Math.random() * 80 + "%";
+};
+
+/* Yes click celebration */
+document.getElementById("yes").onclick = () => {
+  document.getElementById("card").innerHTML =
+    "<h1>I knew it 😍💖</h1><p>You just made my heart the happiest!</p>";
+  document.getElementById("couple").style.display = "block";
+
+  for (let i = 0; i < 40; i++) {
+    let r = document.createElement("div");
+    r.innerHTML = "🌹";
+    r.className = "petals";
+    r.style.left = Math.random() * 100 + "vw";
+    r.style.animationDuration = (Math.random() * 3 + 2) + "s";
+    document.body.appendChild(r);
+  }
+};
+
+/* Music play */
+document.getElementById("musicBtn").onclick = () => {
+  document.getElementById("music").play();
+};
+</script>
+
+</body>
+</html>
