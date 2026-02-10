@@ -2,152 +2,142 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Be My Valentine 💖</title>
+<title>Will You Be My Valentine?</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <style>
-body {
-  margin: 0;
-  height: 100vh;
-  background: linear-gradient(135deg,#ff9a9e,#fad0c4);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: 'Arial', sans-serif;
-  overflow: hidden;
+body{
+  margin:0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg,#ffb3c6,#ffc2d1);
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
 }
 
-.card {
-  background: white;
-  padding: 30px 25px 35px;
-  border-radius: 25px;
-  text-align: center;
-  box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-  max-width: 340px;
-  width: 90%;
-  position: relative;
-  z-index: 2;
+.card{
+  background:white;
+  padding:30px;
+  border-radius:20px;
+  text-align:center;
+  width:90%;
+  max-width:360px;
+  box-shadow:0 15px 40px rgba(0,0,0,.25);
+  z-index:5;
 }
 
-.emoji {
-  font-size: 90px;
-  margin-bottom: 10px;
+h1{color:#e91e63;}
+p{color:#555;}
+
+.rose{
+  width:120px;
+  margin-bottom:15px;
 }
 
-h1 {
-  color: #e6005c;
-  font-size: 24px;
-  margin-bottom: 20px;
+.buttons{
+  display:flex;
+  gap:15px;
+  justify-content:center;
 }
 
-button {
-  padding: 12px 28px;
-  font-size: 18px;
-  border: none;
-  border-radius: 30px;
-  cursor: pointer;
-  margin: 8px;
+button{
+  padding:12px 22px;
+  border-radius:30px;
+  border:none;
+  font-size:16px;
+  cursor:pointer;
 }
 
-#yes {
-  background: #ff4d6d;
-  color: white;
+#yesBtn{
+  background:#e91e63;
+  color:white;
 }
 
-#no {
-  background: #555;
-  color: white;
-  position: absolute;
-  z-index: 3;
+#noBtn{
+  background:#ddd;
 }
 
-#musicBtn {
-  background: #ff85a2;
-  color: white;
-  font-size: 14px;
-  margin-top: 15px;
+.result{
+  display:none;
+  text-align:center;
+  z-index:5;
 }
 
-.petals {
-  position: fixed;
-  top: -50px;
-  font-size: 22px;
-  animation: fall linear infinite;
-  z-index: 1;
+.couple{
+  width:95%;
+  max-width:420px;
+  border-radius:20px;
+  margin-top:20px;
+  box-shadow:0 12px 30px rgba(0,0,0,.3);
 }
 
-@keyframes fall {
-  to {
-    transform: translateY(110vh) rotate(360deg);
-  }
+.petal{
+  position:fixed;
+  top:-40px;
+  font-size:26px;
+  animation:fall linear infinite;
 }
 
-#couple {
-  display: none;
-  margin-top: 15px;
-  font-size: 60px;
+@keyframes fall{
+  to{transform:translateY(110vh) rotate(360deg);}
 }
 </style>
 </head>
 
 <body>
 
-<div class="card" id="card">
-  <div class="emoji">🐼🌹</div>
-  <h1>Will you be my Valentine, Baby? 💖</h1>
-  <button id="yes">Yes</button>
-  <button id="musicBtn">🎵 Tap to play our song</button>
+<div class="card" id="question">
+  <img src="rose.png" class="rose">
+  <h1>Will you be my Valentine? 🌹</h1>
+  <p>From my heart to yours ❤️</p>
+
+  <div class="buttons">
+    <button id="yesBtn">Yes 💖</button>
+    <button id="noBtn">No 🙈</button>
+  </div>
 </div>
 
-<button id="no">No</button>
-
-<div id="couple">💑🌹</div>
+<div class="result" id="result">
+  <h1>I knew it 😍💞</h1>
+  <p>You just made my heart the happiest!</p>
+  <img src="couple.png" class="couple">
+</div>
 
 <audio id="music" loop>
-  <!-- Download a romantic track from Pixabay Music and rename it to music.mp3 -->
   <source src="music.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-/* Initial falling hearts */
-for (let i = 0; i < 25; i++) {
-  let p = document.createElement("div");
-  p.innerHTML = "💖";
-  p.className = "petals";
-  p.style.left = Math.random() * 100 + "vw";
-  p.style.animationDuration = (Math.random() * 4 + 3) + "s";
-  document.body.appendChild(p);
-}
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+const q = document.getElementById("question");
+const r = document.getElementById("result");
+const music = document.getElementById("music");
 
-/* No button runaway */
-const noBtn = document.getElementById("no");
-noBtn.style.top = "75%";
-noBtn.style.left = "55%";
+yesBtn.onclick = () => {
+  q.style.display="none";
+  r.style.display="block";
+  music.play();
+  petals();
+};
 
 noBtn.onmouseover = () => {
-  noBtn.style.top = Math.random() * 80 + "%";
-  noBtn.style.left = Math.random() * 80 + "%";
+  noBtn.style.transform =
+    `translate(${Math.random()*200-100}px,${Math.random()*200-100}px)`;
 };
 
-/* Yes click celebration */
-document.getElementById("yes").onclick = () => {
-  document.getElementById("card").innerHTML =
-    "<h1>I knew it 😍💖</h1><p>You just made my heart the happiest!</p>";
-  document.getElementById("couple").style.display = "block";
-
-  for (let i = 0; i < 40; i++) {
-    let r = document.createElement("div");
-    r.innerHTML = "🌹";
-    r.className = "petals";
-    r.style.left = Math.random() * 100 + "vw";
-    r.style.animationDuration = (Math.random() * 3 + 2) + "s";
-    document.body.appendChild(r);
+function petals(){
+  for(let i=0;i<40;i++){
+    let p=document.createElement("div");
+    p.className="petal";
+    p.innerHTML=Math.random()>0.5?"🌹":"💖";
+    p.style.left=Math.random()*100+"vw";
+    p.style.animationDuration=3+Math.random()*4+"s";
+    document.body.appendChild(p);
   }
-};
-
-/* Music play */
-document.getElementById("musicBtn").onclick = () => {
-  document.getElementById("music").play();
-};
+}
 </script>
 
 </body>
