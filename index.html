@@ -4,97 +4,83 @@
 <meta charset="UTF-8">
 <title>Will You Be My Valentine?</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <style>
 body{
   margin:0;
-  font-family: 'Poppins', sans-serif;
-  background: linear-gradient(135deg,#ffb3c6,#ffc2d1);
+  font-family:'Poppins',sans-serif;
+  background:linear-gradient(135deg,#ffb3c6,#ffc2d1);
   height:100vh;
   display:flex;
   align-items:center;
   justify-content:center;
   overflow:hidden;
 }
-
 .card{
-  background:white;
+  background:#fff;
   padding:30px;
-  border-radius:20px;
+  border-radius:22px;
   text-align:center;
   width:90%;
-  max-width:360px;
-  box-shadow:0 15px 40px rgba(0,0,0,.25);
+  max-width:380px;
+  box-shadow:0 20px 45px rgba(0,0,0,.25);
   z-index:5;
 }
-
 h1{color:#e91e63;}
 p{color:#555;}
-
 .rose{
-  width:120px;
-  margin-bottom:15px;
+  font-size:80px;
 }
-
 .buttons{
   display:flex;
-  gap:15px;
+  gap:18px;
   justify-content:center;
+  margin-top:20px;
 }
-
 button{
-  padding:12px 22px;
+  padding:14px 26px;
   border-radius:30px;
   border:none;
-  font-size:16px;
+  font-size:17px;
   cursor:pointer;
 }
-
-#yesBtn{
-  background:#e91e63;
-  color:white;
-}
-
-#noBtn{
-  background:#ddd;
-}
-
+#yesBtn{background:#e91e63;color:white;}
+#noBtn{background:#ddd;}
 .result{
   display:none;
   text-align:center;
   z-index:5;
 }
-
 .couple{
   width:95%;
   max-width:420px;
-  border-radius:20px;
+  border-radius:22px;
   margin-top:20px;
-  box-shadow:0 12px 30px rgba(0,0,0,.3);
+  box-shadow:0 15px 35px rgba(0,0,0,.3);
 }
-
 .petal{
   position:fixed;
   top:-40px;
-  font-size:26px;
+  font-size:28px;
   animation:fall linear infinite;
 }
-
 @keyframes fall{
   to{transform:translateY(110vh) rotate(360deg);}
 }
+.musicBtn{
+  margin-top:15px;
+  background:#ff4081;
+  color:white;
+}
 </style>
 </head>
-
 <body>
 
 <div class="card" id="question">
-  <img src="rose.png" class="rose">
-  <h1>Will you be my Valentine? 🌹</h1>
+  <div class="rose">🐼🌹</div>
+  <h1>Will you be my Valentine, Baby? 💖</h1>
   <p>From my heart to yours ❤️</p>
-
   <div class="buttons">
-    <button id="yesBtn">Yes 💖</button>
+    <button id="yesBtn">Yes 💕</button>
     <button id="noBtn">No 🙈</button>
   </div>
 </div>
@@ -110,26 +96,26 @@ button{
 </audio>
 
 <script>
-const yesBtn = document.getElementById("yesBtn");
-const noBtn = document.getElementById("noBtn");
-const q = document.getElementById("question");
-const r = document.getElementById("result");
-const music = document.getElementById("music");
+const yesBtn=document.getElementById("yesBtn");
+const noBtn=document.getElementById("noBtn");
+const q=document.getElementById("question");
+const r=document.getElementById("result");
+const music=document.getElementById("music");
 
-yesBtn.onclick = () => {
+yesBtn.onclick=()=>{
   q.style.display="none";
   r.style.display="block";
   music.play();
   petals();
 };
 
-noBtn.onmouseover = () => {
-  noBtn.style.transform =
+noBtn.onmouseover=()=>{
+  noBtn.style.transform=
     `translate(${Math.random()*200-100}px,${Math.random()*200-100}px)`;
 };
 
 function petals(){
-  for(let i=0;i<40;i++){
+  for(let i=0;i<50;i++){
     let p=document.createElement("div");
     p.className="petal";
     p.innerHTML=Math.random()>0.5?"🌹":"💖";
